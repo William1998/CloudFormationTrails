@@ -59,7 +59,7 @@ Resources:
           CustomOriginConfig:
             HTTPSPort: 443
             OriginProtocolPolicy: https-only
-        - DomainName: clincial.genovic.org.au
+        - DomainName: clinical.genovic.org.au
           Id: clinicalportal
           OriginPath: /
           CustomOriginConfig:
@@ -75,7 +75,7 @@ Resources:
             - GET
             - HEAD
           MaxTTL: 300
-          TargetOriginId: alfreadhealth
+          TargetOriginId: alfredhealth
           ViewerProtocolPolicy: redirect-to-https
         ViewerCertificate:
           AcmCertificateArn: !Ref GenoVicWildCardCertificate
@@ -86,10 +86,12 @@ Resources:
   GenoVicWildCardCertificate:
     Type: 'AWS::CertificateManager::Certificate'
     Properties:
-      DomainName: '*.genovic.com.au'
+      DomainName: '*.genovic.org.au'
       SubjectAlternativeNames:
-        - genvic.com.au
-        - www.genovic.com.au
+        - genovic.org.au
+        - www.genovic.org.au
+        - test.internal.genovic.org.au
+        - devdaniel.sandbox.genovic.org.au
   
   GenoVicWaf:
     Type: 'AWS::WAFv2::WebACL'
@@ -130,7 +132,7 @@ Resources:
         VisibilityConfig:
           SampledRequestsEnabled: true
           CloudWatchMetricsEnabled: true
-          MetricName: SQLiMteric
+          MetricName: SQLiMetric
       - Name: AWSManagedRulesKnownBadInputs
         Statement:
           ManagedRuleGroupStatement:
@@ -186,6 +188,6 @@ Resources:
         VisibilityConfig:
           SampledRequestsEnabled: true
           CloudWatchMetricsEnabled: true
-          MetricName: BotContolSetMetric
+          MetricName: BotControlSetMetric
     
   
